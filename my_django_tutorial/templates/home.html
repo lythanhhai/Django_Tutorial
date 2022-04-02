@@ -1,2 +1,6 @@
-<h1>hello nha</h1>
-<p>This is a tutorial django</p>
+{% extends 'base.html' %}
+{% block content %}
+    <h1>hello nha</h1>
+    <p>This is a tutorial django</p>
+    {{ hello }}
+{% endblock %}
