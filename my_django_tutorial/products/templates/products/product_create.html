@@ -1,0 +1,14 @@
+{% extends '../base.html' %}
+
+    <!-- <form method="GET" name="Form" action="."> {% csrf_token %}
+        {{ form.as_p }}
+        <input type="text" name="title" placeholder="Your Search"/>
+        <input type="submit" value="Save"/>
+    </form> -->
+{% block content %}
+    <form method="POST" name="Form" action="."> {% csrf_token %}
+        {{ form.as_p }}
+        <!-- <input type="text" name="title" placeholder="Your Search"/> -->
+        <input type="submit" value="Save"/>
+    </form>
+{% endblock %}
