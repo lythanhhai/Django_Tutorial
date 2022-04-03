@@ -3,19 +3,19 @@ from products.form import ProductForm, ProductFormPure
 from products.models import Product
 # Create your views here.
 
-def product_create_view(request, *arg, **kwarg):
-    form = ProductFormPure()
-    if request.method == "POST":
-        form = ProductFormPure(request.POST or None)
-        if form.is_valid():
-            # form.save()
-            print(form.cleaned_data)
-            Product.objects.create(title=form.cleaned_data['title'], description=form.cleaned_data['description'], price=form.cleaned_data['price'])
+# def product_create_view(request, *arg, **kwarg):
+#     form = ProductFormPure()
+#     if request.method == "POST":
+#         form = ProductFormPure(request.POST or None)
+#         if form.is_valid():
+#             # form.save()
+#             print(form.cleaned_data)
+#             Product.objects.create(title=form.cleaned_data['title'], description=form.cleaned_data['description'], price=form.cleaned_data['price'])
 
-    my_context = {
-        'form': form
-    }
-    return render(request, 'products/product_create.html', my_context)
+#     my_context = {
+#         'form': form
+#     }
+#     return render(request, 'products/product_create.html', my_context)
 
 # def product_create_view(request, *arg, **kwarg):
 #     if request.method == "POST":
@@ -25,16 +25,16 @@ def product_create_view(request, *arg, **kwarg):
 #     }
 #     return render(request, 'products/product_create.html', my_context)
 
-# def product_create_view(request, *arg, **kwarg):
-#     form = ProductForm(request.POST or None)
-#     if form.is_valid():
-#         form.save()
-#         form = ProductForm()
+def product_create_view(request, *arg, **kwarg):
+    form = ProductForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        form = ProductForm()
 
-#     my_context = {
-#         'form': form
-#     }
-#     return render(request, 'products/product_create.html', my_context)
+    my_context = {
+        'form': form
+    }
+    return render(request, 'products/product_create.html', my_context)
 
 def product_detail_view(request, *arg, **kwarg):
     obj = Product.objects.get(id=1)
