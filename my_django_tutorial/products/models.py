@@ -10,3 +10,6 @@ class Product(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=10000)
     summary = models.TextField(default="this is cool!")
     feature = models.BooleanField(default=False)
+
+    def getAbsolutePathItem(self):
+        return f"/product/{self.id}/"
