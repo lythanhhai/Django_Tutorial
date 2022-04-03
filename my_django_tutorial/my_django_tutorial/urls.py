@@ -23,7 +23,9 @@ urlpatterns = [
     path('contact/', viewPages.contact_view, name="contact"),
     path('about/', viewPages.about_view, name="about"),
     path('social/', viewPages.social_view, name="social"),
-    path('product/detail/', viewProducts.product_detail_view, name="detail"),
+    path('product/', viewProducts.product_detail_view, name="detail"),
     path('product/create/', viewProducts.product_create_view, name="create"),
+    path('product/<int:id>/', viewProducts.dynamic_url_view, name="detail_item"),
+    path('product/<int:id>/delete/', viewProducts.product_delete_view, name="delete_view"), 
     path('admin/', admin.site.urls),
 ]

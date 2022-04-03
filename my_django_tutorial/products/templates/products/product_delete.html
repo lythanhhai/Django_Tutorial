@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="POST" action="."> {% csrf_token %}
+        <p>Do you want to remove item have title is {{ obj.title }} ?</p>
+        <p>
+            <input type="submit" value="Delete"/> <a href="../">Cancel</a>
+        </p>
+    </form>
+{% endblock %}

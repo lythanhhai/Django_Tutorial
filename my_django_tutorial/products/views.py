@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from products.form import ProductForm, ProductFormPure
 from products.models import Product
+from django.http import Http404
 # Create your views here.
 
 # def product_create_view(request, *arg, **kwarg):
@@ -37,11 +38,41 @@ def product_create_view(request, *arg, **kwarg):
     return render(request, 'products/product_create.html', my_context)
 
 def product_detail_view(request, *arg, **kwarg):
-    obj = Product.objects.get(id=1)
+    list = Product.objects.all()
     my_context = {
-        'title': obj.title,
-        'description': obj.description,
-        'price': obj.price,
-        'summary': obj.summary,
+        # 'title': obj.title,
+        # 'description': obj.description,
+        # 'price': obj.price,
+        # 'summary': obj.summary,
+        'list': list
     }
     return render(request, 'products/product_detail.html', my_context)
+
+def dynamic_url_view(request, id):
+    obj = get_object_or_404(Product, id= id)
+    try:
+        obj = Product.objects.get(id= id)
+    except Product.DoesNotExist:
+        raise Http404
+
+    context={
+        'obj': obj
+    }
+    return render(request, 'products/product_detail_item.html', context)
+
+def product_delete_view(request, id):
+    # kiểm tra xem có sản phẩm tồn tại không
+    obj = get_object_or_404(Product, id= id)
+    # try:
+    #     obj = Product.objects.get(id= id)
+    # except Product.DoesNotExist:
+    #     raise Http404
+    if request.method == "POST":
+        obj.delete()
+        return redirect("../../")
+
+    context = {
+        'obj': obj
+    }
+
+    return render(request, 'products/product_delete.html', context)
